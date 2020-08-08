@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Reservation List </h2>
+  </div>
+  <br/>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Brand</th>
+      <th scope="col">Model</th>
+      <th scope="col">Day</th>
+      <th scope="col">Reservation Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Return Agency</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let reservation of reservationList">
+    <tr>
+      <td>{{reservation.car.brand}}</td>
+      <td>{{reservation.car.model}}</td>
+      <td>{{reservation.day}}</td>
+      <td>{{reservation.bookingDate | date}}</td>
+      <td>{{reservation.returnDate | date}}</td>
+      <td>
+        <button class="btn btn-info" (click)="getAgency(reservation.returnAgencyId)" data-toggle="modal"
+                data-target="#exampleModalCenter">Detail
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container">
+          <div class="py-5 text-center">
+            <h2>Agency Information </h2>
+          </div>
+          <br/>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Manager</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Location</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{returnAgency.name}}</td>
+              <td>{{returnAgency.manager}}</td>
+              <td>{{returnAgency.phone}}</td>
+              <td>{{returnAgency.location.city}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

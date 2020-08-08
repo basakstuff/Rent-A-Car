@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Reservation </h2>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Brand</h6>
+          </div>
+          <span class="text-muted">{{car.brand}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Model</h6>
+          </div>
+          <span class="text-muted">{{car.model}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Model Year</h6>
+          </div>
+          <span class="text-muted">{{car.modelYear}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Color</h6>
+          </div>
+          <span class="text-muted">{{car.color}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Daily Renting Price</h6>
+          </div>
+          <span class="text-muted">{{car.rentProperty.rentPrice}} $</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Total reservation day</h6>
+          </div>
+          <span class="text-muted">{{reservationForm.get('day').value}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Total Price</h6>
+          </div>
+          <span class="text-success">{{totalPrice}} $</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 order-md-1">
+      <form class="card p-2" (ngSubmit)="save()" [formGroup]="reservationForm" name="reservationForm" novalidate>
+        <div class="mb-3">
+          <label for="firstName">Day Number</label>
+          <input type="number" min="0" class="form-control" id="firstName" placeholder="" formControlName="day" required
+                 readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="starting-date">Starting Date</label>
+          <br/>
+          <p-calendar id="starting-date" [showIcon]="true" formControlName="bookingDate"></p-calendar>
+        </div>
+
+        <div class="mb-3">
+          <label for="end-date">End Date</label>
+          <br/>
+          <p-calendar id="end-date" [showIcon]="true" [disabled]="!this.reservationForm.get('bookingDate').value"
+                      formControlName="returnDate" (onSelect)=calculatePrice()></p-calendar>
+
+        </div>
+        <div class="mb-3">
+          <label for="car">Car</label>
+          <input type="text" class="form-control" id="car" placeholder="{{car.brand}} {{car.model}} {{car.modelYear}}"
+                 readonly>
+        </div>
+        <div class="mb-3">
+          <label for="reservationAgency">Reservation Agency</label>
+          <select class="custom-select d-block w-100" id="reservationAgency" required formControlName="bookingAgencyId">
+            <option *ngFor="let agency of agencyList"
+                    [value]="agency.id">{{agency.name}}</option>
+          </select>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="returnAgencyId">Return Agent</label>
+          <select class="custom-select d-block w-100" id="returnAgencyId" required formControlName="returnAgencyId">
+            <option *ngFor="let agency of agencyList"
+                    [value]="agency.id">{{agency.name}}</option>
+          </select>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="reservationForm.invalid || isSaved">
+          Reserve
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

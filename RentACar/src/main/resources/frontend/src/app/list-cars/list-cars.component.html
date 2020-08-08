@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Car List </h2>
+      </div>
+  <br/>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Brand</th>
+        <th scope="col">Model</th>
+        <th scope="col">Model Year</th>
+        <th scope="col">Color</th>
+        <th scope="col">Fuel Type</th>
+        <th scope="col">Availability</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let car of carList">
+      <tr>
+        <td>{{car.brand}}</td>
+        <td>{{car.model}}</td>
+        <td>{{car.modelYear}}</td>
+        <td>{{car.color}}</td>
+        <td>{{car.fuelType}}</td>
+        <td>
+          <span *ngIf="car.rentProperty.availability">Yes</span>
+          <span *ngIf="!car.rentProperty.availability">No</span>
+        </td>
+        <td><button class="btn btn-outline-success" (click)="setCarObjectAndNavigate(car)" [disabled]="!car.rentProperty.availability" *ngIf="!isAdmin">Rent</button></td>
+        <td><button class="btn btn-outline-success" (click)="deleteCar(car.id)" *ngIf="isAdmin">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

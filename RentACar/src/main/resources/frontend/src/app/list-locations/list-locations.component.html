@@ -1,0 +1,24 @@
+<div class="container"> 
+    <div class="py-5 text-center">
+        <h2>Location List </h2>
+      </div>
+  <br/>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">City</th>
+        <th scope="col">District</th>
+        <th scope="col">Street</th>
+        <th scope="col">Zipcode</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let location of locationList">
+      <tr>
+        <td>{{location.city}}</td>
+        <td>{{location.district}}</td>
+        <td>{{location.street}}</td>
+        <td>{{location.zipcode}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
